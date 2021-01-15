@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="http://paulcristea.xyz/tests/jquery-calendar-bs4-master/src/css/jquery-calendar.css ">
+
+<link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.1/min/moment-with-locales.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-touchswipe@1.6.18/jquery.touchSwipe.min.js"></script>
+<script src="http://paulcristea.xyz/tests/jquery-calendar-bs4-master/src/js/jquery-calendar.js"></script>
+<!-- <script src="src="https://cdn.jsdelivr.net/npm/jquery-touchswipe@1.6.18/jquery.touchSwipe.min.js"></script> -->
+  </head>
+  <body>
+    <script>
+    $(document).ready(function(){
+      moment.locale('en');
+      var now = moment();
+
+      /**
+       * Many events
+       */
+        var events = [
+          {
+          start: now.startOf('week').add(9, 'h').format('X'),
+          end: now.startOf('week').add(10, 'h').format('X'),
+          title: '1',
+          content: 'Hello World! <br> <p>Foo Bar</p>',
+          category:'Professionnal'
+        },
+        {
+          start: now.startOf('week').add(10, 'h').format('X'),
+          end: now.startOf('week').add(11, 'h').format('X'),
+          title: '2',
+          content: 'Hello World! <br> <p>Foo Bar</p>',
+          category:'Professionnal'
+        },
+      ];
+
+      /**
+       * A daynote
+       */
+      var daynotes = [
+        {
+          time: now.startOf('week').add(15, 'h').add(30, 'm').format('X'),
+          title: 'Leo\'s holiday',
+          content: 'yo',
+          category: 'holiday'
+        }
+      ];
+
+      /**
+       * Init the calendar
+       */
+      var calendar = $('#calendar').Calendar({
+        locale: 'en',
+        weekday: {
+          timeline: {
+            intervalMinutes: 30,
+            fromHour: 9
+          }
+        },
+        events: events,
+        daynotes: daynotes
+      }).init();
+
+      /**
+       * Listening for events
+       */
+
+      $('#calendar').on('Calendar.init', function(event, instance, before, current, after){
+        console.log('event : Calendar.init');
+        console.log(instance);
+        console.log(before);
+        console.log(current);
+        console.log(after);
+      });
+      $('#calendar').on('Calendar.daynote-mouseenter', function(event, instance, elem){
+        console.log('event : Calendar.daynote-mouseenter');
+        console.log(instance);
+        console.log(elem);
+      });
+      $('#calendar').on('Calendar.daynote-mouseleave', function(event, instance, elem){
+        console.log('event : Calendar.daynote-mouseleave');
+        console.log(instance);
+        console.log(elem);
+      });
+      $('#calendar').on('Calendar.event-mouseenter', function(event, instance, elem){
+        console.log('event : Calendar.event-mouseenter');
+        console.log(instance);
+        console.log(elem);
+      });
+      $('#calendar').on('Calendar.event-mouseleave', function(event, instance, elem){
+        console.log('event : Calendar.event-mouseleave');
+        console.log(instance);
+        console.log(elem);
+      });
+      $('#calendar').on('Calendar.daynote-click', function(event, instance, elem, evt){
+        console.log('event : Calendar.daynote-click');
+        console.log(instance);
+        console.log(elem);
+        console.log(evt);
+      });
+      $('#calendar').on('Calendar.event-click', function(event, instance, elem, evt){
+        console.log('event : Calendar.event-click');
+        console.log(instance);
+        console.log(elem);
+        console.log(evt);
+      });
+    });
+  </script>
+  <div id="calendar"></div>
+
+  </body>
+</html>
