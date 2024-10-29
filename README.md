@@ -1,4 +1,4 @@
-# PHP_BachelorDegreeProject
+# Appointment Management Application
 ### Reason
 As project for Bachelor Degree I've created an Appointment webapp.
 ### Functionalities
